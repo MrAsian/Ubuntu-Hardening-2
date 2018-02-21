@@ -1,0 +1,176 @@
+#!/bin/bash
+
+clear
+
+function all {
+disable-guest
+disable-ipv6
+find-things
+firewall
+pass-policy
+pass-reset
+secure-root
+software
+ssh-conf
+sys-update
+misc
+end
+}
+
+function disable-guest {
+if ! grep "allow-guest=false" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf > dev/null
+then
+	echo "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+fi
+sleep 0.5
+clear
+echo "Guest account is disabled."
+sleep 1
+clear
+}
+
+function disable-ipv6 {
+sed -i -e "s/alias net-pf-10 off/alias ipv6 off/" /etc/modprobe.d/aliases
+sleep 0.5
+clear
+echo "IPv6 is disabled."
+sleep 1
+clear
+}
+
+function end {
+echo "Stay gold."
+sleep 1
+clear
+exit
+}
+
+function find-things {
+for program in apache2 bind9 cain cracklib hydra john nc netcat nginx nikto postgresql samba telnet tftp-server vsftpd
+do
+	which $program >> output
+done
+for files in *.jpg *.mp3 *.mp4 *.png
+do
+	find /home -name $files >> output
+done
+sleep 0.5
+clear
+echo "Suspicious programs and files have been printed to the output file."
+sleep 1
+clear
+}
+
+function firewall {
+apt-get -y install ufw
+ufw enable
+sleep 0.5
+clear
+echo "Firewall has been enabled."
+sleep 1
+clear
+}
+
+function misc {
+for permissions in /etc/hosts.allow /etc/mtab /etc/profile /etc/syslog.pid /etc/utmp /var/adm/wtmp /var/log/wtmp /var/run/syslog.pid /etc/inittab /etc/sysctl.conf
+do
+	chmod 0700 $permissions
+done
+# make sure nothing is in the rc.local file
+for etc in /etc/rc.local /etc/resolv.conf /etc/hosts /etc/passwd /etc/shadow
+do
+	gedit $etc
+done
+echo "vm.swappiness=1" >> /etc/sysctl.conf
+sed -i -e "s/expose_php on/expose_php off/" /etc/php.config
+sleep 0.5
+clear
+echo "Miscellaneous things have been done."
+sleep 1
+clear
+}
+
+function pass-policy {
+sed -i -e "s/obscure sha512/obscure sha512 minlen=12 retry=3 remember 5/" /etc/pam.d/common-password
+sed -i -e "s/PASS_MAX_DAYS	99999/PASS_MAX_DAYS	60/" /etc/login.defs
+sed -i -e "s/PASS_MIN_DAYS	0/PASS_MIN_DAYS	59/" /etc/login.defs
+sleep 0.5
+clear
+echo "Password policy has been set."
+sleep 1
+clear
+}
+
+function pass-reset {
+read -p "What should the default password be?   " defpass
+ls /home > users
+cat users | while read users
+do
+	echo $users:$defpass | chpasswd
+done
+rm users
+sleep 0.5
+clear
+echo "Default password [$defpass] has been set."
+sleep 2
+clear 2
+}
+
+function secure-root {
+passwd -l root
+sleep 0.5
+clear
+echo "Root account password secured."
+sleep 1
+clear
+}
+
+function software {
+for installs in apparmor bastille chkrootkit clamav lynis rkhunter
+do
+	apt-get -y install $installs
+done
+/usr/sbin/chkrootkit > chkrootkit
+bastille -c
+sleep 0.5
+clear
+echo "apparmor, bastille, chkrootkit, clamav, lynis, and rkhunter have been installed."
+echo "chkrootkit and bastille have been enabled."
+sleep 2
+clear
+}
+
+function ssh-conf {
+sed -i -e "s/PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/ssh_config
+sed -i -e "s/PermitRootLogin yes/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i -e "s/# Port 22/Port 222/" /etc/ssh/sshd_config
+service sshd restart
+sleep 0.5
+clear
+echo "SSH and SSHD policies have been set."
+echo "SSH is now on port 222."
+sleep 1
+clear
+}
+
+function sys-update {
+read -p "Update policy has been properly set? [y/n] " policy
+while !([ $policy == "y" ]  [ $policy == "yes" ]  [ $policy == "Y" ]  [ $policy == "YES" ]  [ $policy == "Yes" ])
+do
+	echo "Go set it."
+	read -p "Update policy has been properly set? [y/n] " policy
+done
+apt-get -y update
+apt-get -y upgrade
+sleep 0.5
+clear
+echo "System has been updated."
+sleep 1
+clear
+}
+
+echo "Your options are"
+echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
+read -p "What do?   " action
+clear
+$action
