@@ -1,6 +1,8 @@
 # Ubuntu-Hardening-2
 
-This is a script created for use for team 2 of the Wando Cyber Defense Club during CyberPatriot competitions. This is the updated and revised version of [Ubuntu-Hardening-1](https://github.com/MrAsian/Ubuntu-Hardening-1).
+This is a script created for use on the Ubuntu image for team 2 of the Wando Cyber Defense Club during CyberPatriot competitions. This script is orginally created in 2016. Ongoing Project.
+
+This is the updated and revised version of [Ubuntu-Hardening-1](https://github.com/MrAsian/Ubuntu-Hardening-1).
 
 Usage
 -----
