@@ -125,7 +125,7 @@ sleep 1
 clear
 }
 
-function software {
+function security {
 for installs in apparmor bastille chkrootkit clamav lynis rkhunter
 do
 	apt-get -y install $installs
