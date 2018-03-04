@@ -26,7 +26,7 @@ Things in the script
 
 - all
 
-  - Runs every command in the script.
+  - Runs every command in the script except for end and sys-update. It will ask the user wether or not they would like to have the system update.
 
 - disable-guest
 
@@ -106,10 +106,6 @@ Things in the script
 
 Future Additions
 ----------------
-
-- Adding an option to perform the system update in the all command.
-
-- Adding a loop to the script so it doesn't automatically terminate after running one command. The end command will actually be used to exit the script instead.
 
 - Make pass-reset more secure by hiding the input and requiring user to type in a second time to verify the password. Also will be removing the "Default password _______ has been set".
 
