@@ -12,9 +12,17 @@ pass-reset
 secure-root
 software
 ssh-conf
-sys-update
 misc
-end
+read -p "Perform update right now? [y/n]   " update
+while !([ $update == "y" ] || [ $update == "yes" ] || [ $update == "Y" ] || [ $update == "YES" ] || [ $update == "Yes" ] || [ $update == "n" ] || [ $update == "no" ] || [ $update == "N" ] || [ $update == "NO" ] || [ $update == "No" ])
+do
+	read -p "Perform update right now? [y/n]   " update
+done
+if ([ $update == "y" ] || [ $update == "yes" ] || [ $update == "Y" ] || [ $update == "YES" ] || [ $update == "Yes" ])
+then
+	sys-update
+fi
+clear
 }
 
 function disable-guest {
@@ -115,7 +123,7 @@ done
 rm users
 sleep 0.5
 clear
-echo "Default password [$defpass] has been set."
+echo "Default password has been set."
 sleep 2
 clear 2
 }
@@ -159,7 +167,7 @@ clear
 
 function sys-update {
 read -p "Update policy has been properly set? [y/n] " policy
-while !([ $policy == "y" ]  [ $policy == "yes" ]  [ $policy == "Y" ]  [ $policy == "YES" ]  [ $policy == "Yes" ])
+while !([ $policy == "y" ] || [ $policy == "yes" ] || [ $policy == "Y" ] || [ $policy == "YES" ] || [ $policy == "Yes" ])
 do
 	echo "Go set it."
 	read -p "Update policy has been properly set? [y/n] " policy
@@ -173,8 +181,11 @@ sleep 1
 clear
 }
 
+while true
+do
 echo "Your options are"
-echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n help\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
+echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
 read -p "What do?   " action
 clear
 $action
+done
