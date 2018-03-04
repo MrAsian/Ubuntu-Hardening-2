@@ -16,7 +16,7 @@ sudo su
 After logging in, cd to where the script is stored and run
 
 ```bash
-bash ./script
+bash script
 ```
 
 This will run the script, just follow the instructions in the script from there on.
