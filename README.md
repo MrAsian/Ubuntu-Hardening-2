@@ -56,6 +56,10 @@ Things in the script
 
   - Installs and enables the firewall with default settings.
 
+- help
+
+  - Opens the Guide, which is basically this readme.
+
 - misc
 
   - Sets the permission in some files and opens some files that should be looked at during the CyberPatriot competitions.
@@ -102,8 +106,6 @@ Things in the script
 
 Future Additions
 ----------------
-
-- Adding a help command with basically all of the above information into the script so it can be viewed straight from the terminal
 
 - Adding an option to perform the system update in the all command.
 
