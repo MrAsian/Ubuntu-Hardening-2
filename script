@@ -18,7 +18,7 @@ end
 }
 
 function disable-guest {
-if ! grep "allow-guest=false" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf > dev/null
+if ! grep "allow-guest=false" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf > /dev/null
 then
 	echo "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
 fi
@@ -69,6 +69,10 @@ clear
 echo "Firewall has been enabled."
 sleep 1
 clear
+}
+
+function help {
+nano Guide
 }
 
 function misc {
@@ -170,7 +174,7 @@ clear
 }
 
 echo "Your options are"
-echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
+echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n help\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
 read -p "What do?   " action
 clear
 $action
