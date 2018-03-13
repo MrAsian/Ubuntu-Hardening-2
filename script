@@ -48,7 +48,7 @@ clear
 
 function end {
 echo "Stay gold."
-sleep 1
+sleep 0.5
 clear
 exit
 }
@@ -114,18 +114,33 @@ clear
 }
 
 function pass-reset {
-read -p "What should the default password be?   " defpass
 ls /home > users
+read -s -p "What should the default password be?	" defpass
+echo ""
+read -s -p "Retype the password to confirm.	" confirm
+echo ""
+while !([ "$defpass" == "$confirm" ])
+do
+	echo "The password entered did not match"
+	sleep 0.5
+	clear
+	read -s -p "What should the default password be?	" defpass
+	echo ""
+	read -s -p "Retype the password to confirm.	" confirm
+	echo ""
+done
 cat users | while read users
 do
 	echo $users:$defpass | chpasswd
 done
+unset defpass
+unset confirm
 rm users
 sleep 0.5
 clear
 echo "Default password has been set."
-sleep 2
-clear 2
+sleep 1
+clear
 }
 
 function secure-root {
