@@ -26,7 +26,7 @@ Things in the script
 
 - all
 
-  - Runs every command in the script except for end and sys-update. It will ask the user wether or not they would like to have the system update.
+  - Runs every command in the script except for end and sys-update. It will ask the user whether or not they would like to have the system update.
 
 - disable-guest
 
@@ -81,6 +81,8 @@ Things in the script
 - pass-reset
 
   - Will prompt the user for a password to be used as a default on all accounts. The default password will be set for all acounts, including the current user.
+  
+  - Input is hidden. It will prompt the user to reenter the password to make sure it is typed correctly.
 
 - secure-root
 
@@ -107,7 +109,7 @@ Things in the script
 Future Additions
 ----------------
 
-- Make pass-reset more secure by hiding the input and requiring user to type in a second time to verify the password. Also will be removing the "Default password _______ has been set".
+- Nothing as of right now. Will add more things when it pops into my head.
 
 Contributors
 ------------
