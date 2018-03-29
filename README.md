@@ -25,7 +25,7 @@ Things in the script
 --------------------
 
 - all
-  - Runs every command in the script except for end and sys-update. It will ask the user whether or not they would like to have the system update.
+  - Runs every command in the script except for end, help, and sys-update. It will ask the user whether or not they would like to have the system updated.
 
 - disable-guest
   - Disables the guest account.
@@ -47,10 +47,11 @@ Things in the script
   - Installs and enables the firewall with default settings.
 
 - help
-  - Opens the Guide, which is basically this readme.
+  - Opens the portion of the readme that explain what each command does.
 
 - misc
   - Sets the permission in some files and opens some files that should be looked at during the CyberPatriot competitions.
+  - The permissions will allow only the owner of the file to read, write, and execute it.
 
 - pass-policy
   - Sets the password policy.
