@@ -167,7 +167,7 @@ while true
 do
 clear
 echo "Your options are"
-echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n software\n ssh-conf\n sys-update"
+echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n security\n ssh-conf\n sys-update"
 read -p "What do?   " action
 clear
 $action
