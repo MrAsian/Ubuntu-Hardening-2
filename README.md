@@ -16,10 +16,18 @@ sudo su
 After logging in, cd to where the script is stored and run
 
 ```bash
-bash script
+chmod 700 script
 ```
 
-This will run the script, just follow the instructions in the script from there on.
+This will modify the permissions for the script so only the user that has the script can read, write, and execute the script.
+
+To run the script, run the following
+
+```bash
+./script
+```
+
+The script will begin to run, just follow the instructions in the script from there on.
 
 Things in the script
 --------------------
