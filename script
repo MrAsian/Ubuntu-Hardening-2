@@ -39,7 +39,7 @@ sleep 1.5
 function disable-ipv6 {
 sed -i -e "s/alias net-pf-10 off/alias ipv6 off/" /etc/modprobe.d/aliases
 echo -e "\033[1mIPv6 is disabled.\033[0m"
-sleep
+sleep 1
 }
 
 function end {
