@@ -3,10 +3,10 @@
 clear
 
 function all {
-audit
-bum
 disable-guest
 disable-ipv6
+enable-audit
+enable-bum
 find-things
 firewall
 pass-reset
@@ -29,18 +29,6 @@ sleep 1.5
 clear
 }
 
-function audit {
-apt-get -y install auditd
-auditctl -e 1
-echo -e "\033[1mAuditing is enabled.\033[0m"
-}
-
-function bum {
-apt-get -y install bum
-bum
-echo -e "\033[1mServices can now be managed through bum.\033[0m"
-}
-
 function disable-guest {
 if ! grep "allow-guest=false" /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf > /dev/null
 then
@@ -54,6 +42,18 @@ function disable-ipv6 {
 sed -i -e "s/alias net-pf-10 off/alias ipv6 off/" /etc/modprobe.d/aliases
 echo -e "\033[1mIPv6 is disabled.\033[0m"
 sleep 1
+}
+
+function enable-audit {
+apt-get -y install auditd
+auditctl -e 1
+echo -e "\033[1mAuditing is enabled.\033[0m"
+}
+
+function enable-bum {
+apt-get -y install bum
+bum
+echo -e "\033[1mServices can now be managed through bum.\033[0m"
 }
 
 function end {
@@ -183,7 +183,7 @@ while true
 do
 clear
 echo "Your options are"
-echo -e " all\n audit\n bum\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n help\n misc\n pass-reset\n policy\n secure-root\n security\n ssh-conf\n sys-update"
+echo -e " all\n disable-guest\n disable-ipv6\n enable-audit\n enable-bum end\n find-things\n firewall\n help\n misc\n pass-reset\n policy\n secure-root\n security\n ssh-conf\n sys-update"
 read -p "What do?   " action
 clear
 $action
