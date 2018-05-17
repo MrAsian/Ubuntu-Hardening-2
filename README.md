@@ -27,6 +27,12 @@ Things in the script
 - all
   - Runs every command in the script except for end, help, and sys-update. It will ask the user whether or not they would like to have the system updated.
 
+- audit
+  - Installs auditd and enables auditing.
+
+- bum
+  - Installs bum, which is used to manage services.
+
 - disable-guest
   - Disables the guest account.
 
