@@ -10,7 +10,7 @@ firewall
 pass-policy
 pass-reset
 secure-root
-software
+security
 ssh-conf
 misc
 read -p "Perform update right now? [y/n]   " update
