@@ -32,11 +32,13 @@ clear
 function audit {
 apt-get -y install auditd
 auditctl -e 1
+echo -e "\033[1mAuditing is enabled.\033[0m"
 }
 
 function bum {
 apt-get -y install bum
 bum
+echo -e "\033[1mServices can now be managed through bum.\033[0m"
 }
 
 function disable-guest {
