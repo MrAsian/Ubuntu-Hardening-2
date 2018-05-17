@@ -82,7 +82,7 @@ sleep 1.5
 }
 
 function help {
-sed -n -e 35,95p README.md | less
+sed -n -e 34,96p README.md | less
 }
 
 function misc {
