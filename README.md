@@ -47,7 +47,7 @@ Things in the script
     - Targetted programs include:
         apache2, bind9, cain, cracklib, hydra, john, nc, netcat, nginx, nikto, postgrsql, samba, telnet, tftp-server, vsftpd
     - Targetted file types include:
-       .jpg, .mp3, .mp4, .png
+       *.jpg, *.mp3, *.mp4, *.png
 
 - firewall
   - Installs and enables the firewall with default settings.
