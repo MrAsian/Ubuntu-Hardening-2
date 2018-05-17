@@ -3,12 +3,14 @@
 clear
 
 function all {
+audit
+bum
 disable-guest
 disable-ipv6
 find-things
 firewall
-pass-policy
 pass-reset
+policy
 secure-root
 security
 ssh-conf
@@ -25,6 +27,16 @@ fi
 echo -e "\033[1mEverything done.\033[0m"
 sleep 1.5
 clear
+}
+
+function audit {
+apt-get -y install auditd
+auditctl -e 1
+}
+
+function bum {
+apt-get -y install bum
+bum
 }
 
 function disable-guest {
@@ -89,14 +101,6 @@ echo -e "\033[1mMiscellaneous things have been done.\033[0m"
 sleep 1.5
 }
 
-function pass-policy {
-sed -i -e "s/obscure sha512/obscure sha512 minlen=12 retry=3 remember=5/" /etc/pam.d/common-password
-sed -i -e "s/PASS_MAX_DAYS	99999/PASS_MAX_DAYS	60/" /etc/login.defs
-sed -i -e "s/PASS_MIN_DAYS	60/PASS_MIN_DAYS	59/" /etc/login.defs
-echo -e "\033[1mPassword policy has been set.\033[0m"
-sleep 1.5
-}
-
 function pass-reset {
 ls /home > users
 read -s -p "What should the default password be?	" defpass
@@ -119,6 +123,16 @@ unset defpass
 unset confirm
 rm users
 echo -e "\033[1mDefault password has been set.\033[0m"
+sleep 1.5
+}
+
+function policy {
+sed -i -e "s/obscure sha512/obscure sha512 minlen=12 retry=3 remember=5/" /etc/pam.d/common-password
+sed -i -e "s/PASS_MAX_DAYS	99999/PASS_MAX_DAYS	60/" /etc/login.defs
+sed -i -e "s/PASS_MIN_DAYS	60/PASS_MIN_DAYS	59/" /etc/login.defs
+echo -e "\033[1mPassword policy has been set.\033[0m"
+echo "auth required pam_tally2.so deny=5 onerr=fail unlock_time=1800" >> /etc/pam.d/common-auth
+echo -e "\033[1mAccount policy has been set.\033[0m"
 sleep 1.5
 }
 
@@ -167,7 +181,7 @@ while true
 do
 clear
 echo "Your options are"
-echo -e " all\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n misc\n pass-policy\n pass-reset\n secure-root\n security\n ssh-conf\n sys-update"
+echo -e " all\n audit\n bum\n disable-guest\n disable-ipv6\n end\n find-things\n firewall\n help\n misc\n pass-reset\n policy\n secure-root\n security\n ssh-conf\n sys-update"
 read -p "What do?   " action
 clear
 $action
