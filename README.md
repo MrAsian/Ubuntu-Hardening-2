@@ -94,11 +94,6 @@ Things in the script
 - sys-update
   - Performs a system update.
 
-Future Additions
-----------------
-
-- Nothing as of right now. Will add more things when it pops into my head.
-
 Contributors
 ------------
 @MrAsian @DrDavid52
